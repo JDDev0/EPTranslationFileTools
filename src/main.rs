@@ -165,7 +165,7 @@ fn update_templates(binary_name: &str, subcommand: &str, args: ArgsOs) -> Result
         &mut has_item, &mut has_block, &mut has_container,
     )?;
 
-    println!("Translation file was updates!");
+    println!("Translation file was updated!");
 
     Ok(ExitCode::SUCCESS)
 }
