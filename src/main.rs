@@ -132,7 +132,9 @@ fn update_templates(binary_name: &str, args: ArgsOs) -> Result<ExitCode, Box<dyn
 
             has_block = true;
             line_buffer.push(line);
-        }else if line.contains("\"container.energizedpower.") {
+        }else if line.contains("\"container.energizedpower.") &&
+                //Ignore special case: Separate translations for Item Conveyor Belt machine containers
+                !line.contains("item_conveyor_belt") {
             if has_container {
                 write_and_clear_combined_translations_line_buffer(
                     &mut output, &mut line_buffer,
