@@ -185,7 +185,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
 
     let input = BufReader::new(input).lines();
 
-    const TRANSLATION_TYPE_PREFIXES: [&str; 25] = [
+    const TRANSLATION_TYPE_PREFIXES: [&str; 27] = [
         "item.energizedpower.",
         "block.energizedpower.",
         "block_state.energizedpower.",
@@ -212,6 +212,9 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
         "itemGroup.energizedpower.",
 
         "entity.minecraft.villager.",
+
+        "_template.community_translations.info.",
+        "_template.cti.",
     ];
 
     let mut dummy_functionality = 0;
@@ -227,6 +230,24 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
         //Unify soil types
         if line.contains("\"soil_type") {
             return "UNIFIED_soil_type".to_string();
+        }
+
+        //Handle community translations info
+        if line.contains("\"_template.community_translations.info.") || line.contains("\"_template.cti.") {
+            if line.contains("\"_template.community_translations.info.") {
+                //Unify info.1 and info.2 with "contribution"
+                if line.contains("info.1\"") || line.contains("info.2\"") {
+                    return "CTI_contribution".to_string();
+                }
+
+                //Unify info.3 with "datagen"
+                if line.contains("info.3\"") {
+                    return "CTI_datagen".to_string();
+                }
+            }
+
+            //Force separate from other translations
+            return "CTI_".to_string() + &functionality;
         }
 
         const UNIFIED_FUNCTIONALITIES: [&str; 27] = [
@@ -481,6 +502,12 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
         }
 
         if should_append_whitespace {
+            writeln!(output)?;
+        }
+
+        //Add 2 additional empty lines after community translations info
+        if functionality == "CTI_datagen" {
+            writeln!(output)?;
             writeln!(output)?;
         }
     }
