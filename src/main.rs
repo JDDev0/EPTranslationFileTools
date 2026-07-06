@@ -19,6 +19,7 @@ fn main() -> Result<ExitCode, Box<dyn Error>> {
         Some(subcommand @ "fix_lines") => fix_lines(&binary_name, subcommand, args),
         Some(subcommand @ "update_templates") => update_templates(&binary_name, subcommand, args),
         Some(subcommand @ "reorder_translations") => reorder_translations(&binary_name, subcommand, args),
+        Some(subcommand @ "add_new_translations") => add_new_translations(&binary_name, subcommand, args),
         _ => {
             println!("\
             Usage: {binary_name} <subcommand> <args...>\n\
@@ -27,7 +28,8 @@ fn main() -> Result<ExitCode, Box<dyn Error>> {
             - \"update_templates\": Combines \"block.energizedpower.\" and \"item.energizedpower.\" to \"_template.epblock.\" and \
                 \"block.energizedpower.\", \"item.energizedpower.\", and \"container.energizedpower.\" to \"_template.epcontainer.\"\n\
             - \"reorder_translations\": Reorders translations from translation type based order to functionality based order \
-                (e.g. item name, tooltips, advancement, and book page are directly below the item translation)");
+                (e.g. item name, tooltips, advancement, and book page are directly below the item translation)\n\
+            - \"add_new_translations\": Adds new translations from a reference file");
 
             Ok(ExitCode::FAILURE)
         }
@@ -515,6 +517,58 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
     }
 
     println!("Translation file was reordered!");
+
+    Ok(ExitCode::SUCCESS)
+}
+
+fn add_new_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Result<ExitCode, Box<dyn Error>> {
+    let args = args.collect::<Vec<OsString>>();
+    if args.len() != 2 && args.len() != 3 {
+        println!("Usage: {binary_name} {subcommand} <reference file> <input file> <output file>");
+        println!("Usage (inplace update): {binary_name} {subcommand} <reference file> <file>");
+
+        return Ok(ExitCode::FAILURE);
+    }
+
+    let reference = &args[0];
+    let input = &args[1];
+    let output = args.get(2).unwrap_or(input);
+
+    let reference = File::open(reference)?;
+    let mut reference = BufReader::new(reference).lines();
+
+    let input = File::open(input)?;
+    let input = BufReader::new(input).lines();
+    let input = input.collect::<Result<Vec<_>,_>>()?;
+
+    let mut output = File::create(output)?;
+
+    fn translation_key_equals(line_a: &str, line_b: &str) -> bool {
+        if line_a == line_b {
+            return true;
+        }
+
+        if let Some(index_a) = line_a.find("\":") && let Some(index_b) = line_b.find("\":") {
+            let key_a = &line_a[..index_a];
+            let key_b = &line_b[..index_b];
+
+            return key_a == key_b;
+        }
+
+        false
+    }
+
+    for line in input {
+        while let Some(reference_line) = reference.next() &&
+                let reference_line = reference_line? &&
+                !translation_key_equals(&line, &reference_line) {
+            writeln!(output, "{reference_line}")?;
+        }
+
+        writeln!(output, "{line}")?;
+    }
+
+    println!("Translation file was extended with new translations!");
 
     Ok(ExitCode::SUCCESS)
 }
