@@ -11,7 +11,7 @@ fn main() -> Result<ExitCode, Box<dyn Error>> {
     let mut args = env::args_os();
 
     let binary_name = args.next();
-    let binary_name = binary_name.as_deref().map(|str| str.display().to_string()).unwrap_or("TranslationFileLineFixer".to_string());
+    let binary_name = binary_name.as_deref().map(|str| str.display().to_string()).unwrap_or("EPTranslationFileTools".to_string());
 
     let subcommand_name = args.next();
     let subcommand_name = subcommand_name.as_deref().map(|str| str.display().to_string());
