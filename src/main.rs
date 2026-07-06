@@ -172,18 +172,22 @@ fn update_templates(binary_name: &str, subcommand: &str, args: ArgsOs) -> Result
 
 fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Result<ExitCode, Box<dyn Error>> {
     let args = args.collect::<Vec<OsString>>();
-    let args = args.as_array();
-
-    let Some([input, output]) = args else {
+    if args.len() != 1 && args.len() != 2 {
         println!("Usage: {binary_name} {subcommand} <input file> <output file>");
+        println!("Usage (inplace update): {binary_name} {subcommand} <file>");
 
         return Ok(ExitCode::FAILURE);
-    };
+    }
+
+    let input = &args[0];
+    let output = args.get(1).unwrap_or(input);
 
     let input = File::open(input)?;
-    let mut output = File::create(output)?;
 
     let input = BufReader::new(input).lines();
+    let input = input.collect::<Result<Vec<_>,_>>()?;
+
+    let mut output = File::create(output)?;
 
     const TRANSLATION_TYPE_PREFIXES: [&str; 27] = [
         "item.energizedpower.",
@@ -387,8 +391,6 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
 
     //Group by functionality while preserving relative order
     for line in input {
-        let line = line?;
-
         if line.trim().is_empty() {
             continue;
         }
