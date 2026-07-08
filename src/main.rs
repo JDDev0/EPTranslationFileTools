@@ -256,7 +256,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             return "CTI_".to_string() + &functionality;
         }
 
-        const UNIFIED_FUNCTIONALITIES: [&str; 27] = [
+        const UNIFIED_FUNCTIONALITIES: [&str; 28] = [
             "fertilizer",
 
             "press_mold",
@@ -280,6 +280,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             "moon_light_upgrade",
             "item_ejector_upgrade",
             "item_pulling_upgrade",
+            "xp_extraction_upgrade",
 
             "hammer",
             "cutter",
