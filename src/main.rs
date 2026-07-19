@@ -450,7 +450,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             ("solar_cells", "elite_solar_cell"),
 
             //Book page after highest tier machine
-            ("machine_frames", "reinforced_advanced_machine_frame"),
+            ("machine_frames", "elite_machine_frame"),
             ("powered_furnaces", "advanced_powered_furnace"),
             ("auto_crafters", "advanced_auto_crafter"),
             ("crushers", "advanced_crusher"),
