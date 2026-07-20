@@ -433,7 +433,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
 
     //Improve functionality order
     {
-        const MOVE_AFTER: [(&str, &str); 22] = [
+        const MOVE_AFTER: [(&str, &str); 23] = [
             //Cable tooltip and book page after highest tier cable
             ("cable", "superconductive_cable"),
             ("cables", "cable"),
@@ -464,6 +464,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             ("charger_uncharger", "advanced_uncharger"),
             ("minecart_charger_uncharger", "advanced_minecart_uncharger"),
             ("fluid_filler_fluid_drainer", "fluid_drainer"),
+            ("battery_boxes", "elite_battery_box"),
 
             //Book page after highest tier entity
             ("battery_box_minecarts", "elite_battery_box_minecart"),
