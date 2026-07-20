@@ -466,7 +466,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             ("fluid_filler_fluid_drainer", "fluid_drainer"),
 
             //Book page after highest tier entity
-            ("battery_box_minecarts", "advanced_battery_box_minecart"),
+            ("battery_box_minecarts", "elite_battery_box_minecart"),
 
             //Tooltips after highest tier machine
             ("auto_crafter_tooltip", "advanced_auto_crafter"),
