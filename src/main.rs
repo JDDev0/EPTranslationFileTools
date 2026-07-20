@@ -256,7 +256,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             return "CTI_".to_string() + &functionality;
         }
 
-        const UNIFIED_FUNCTIONALITIES: [&str; 29] = [
+        const UNIFIED_FUNCTIONALITIES: [&str; 30] = [
             "fertilizer",
 
             "press_mold",
@@ -286,6 +286,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             "hammer",
             "cutter",
 
+            "uhv_transformer",
             "ehv_transformer",
             "hv_transformer",
             "lv_transformer",
@@ -438,7 +439,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             ("cables", "cable"),
 
             //Transformer tooltips and book page after highest tier transformer
-            ("transformer", "UNIFIED_ehv_transformer"),
+            ("transformer", "UNIFIED_uhv_transformer"),
             ("configurable_transformer", "transformer"),
             ("transformers", "configurable_transformer"),
 
