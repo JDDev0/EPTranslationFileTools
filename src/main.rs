@@ -434,7 +434,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
     {
         const MOVE_AFTER: [(&str, &str); 22] = [
             //Cable tooltip and book page after highest tier cable
-            ("cable", "energized_crystal_matrix_cable"),
+            ("cable", "superconductive_cable"),
             ("cables", "cable"),
 
             //Transformer tooltips and book page after highest tier transformer
