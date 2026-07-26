@@ -462,7 +462,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
 
             //Combined book page after highest tier machine
             ("charger_uncharger", "elite_uncharger"),
-            ("minecart_charger_uncharger", "advanced_minecart_uncharger"),
+            ("minecart_charger_uncharger", "elite_minecart_uncharger"),
             ("fluid_filler_fluid_drainer", "fluid_drainer"),
             ("battery_boxes", "elite_battery_box"),
 
