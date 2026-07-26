@@ -473,7 +473,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             ("auto_crafter_tooltip", "advanced_auto_crafter"),
 
             //Tooltips and recipe category after highest tier machine
-            ("chargers", "advanced_charger"),
+            ("chargers", "elite_charger"),
         ];
 
         for (from, to) in MOVE_AFTER {
