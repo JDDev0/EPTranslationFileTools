@@ -452,7 +452,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
 
             //Book page after highest tier machine
             ("machine_frames", "elite_machine_frame"),
-            ("powered_furnaces", "advanced_powered_furnace"),
+            ("powered_furnaces", "elite_powered_furnace"),
             ("auto_crafters", "advanced_auto_crafter"),
             ("crushers", "advanced_crusher"),
             ("pulverizers", "advanced_pulverizer"),
