@@ -312,6 +312,15 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
                     return "UNIFIED_raw_press_mold".to_string();
                 }
 
+                //Separate hardened, advanced, and elite press molds to different groups
+                if unified_functionality == "press_mold" && functionality.contains("hardened") {
+                    return "UNIFIED_hardened_press_mold".to_string();
+                }else if unified_functionality == "press_mold" && functionality.contains("advanced") {
+                    return "UNIFIED_advanced_press_mold".to_string();
+                }else if unified_functionality == "press_mold" && functionality.contains("elite") {
+                    return "UNIFIED_elite_press_mold".to_string();
+                }
+
                 //Do not unify metal dusts and sawdust or charcoal dust
                 if unified_functionality == "dust" && (functionality.contains("sawdust") || functionality.contains("charcoal")) {
                     continue;
