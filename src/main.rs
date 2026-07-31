@@ -462,7 +462,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             //Book page after highest tier machine
             ("machine_frames", "elite_machine_frame"),
             ("powered_furnaces", "elite_powered_furnace"),
-            ("auto_crafters", "advanced_auto_crafter"),
+            ("auto_crafters", "elite_auto_crafter"),
             ("crushers", "advanced_crusher"),
             ("pulverizers", "advanced_pulverizer"),
             ("fluid_pumps", "advanced_fluid_pump"),
@@ -479,7 +479,7 @@ fn reorder_translations(binary_name: &str, subcommand: &str, args: ArgsOs) -> Re
             ("battery_box_minecarts", "elite_battery_box_minecart"),
 
             //Tooltips after highest tier machine
-            ("auto_crafter_tooltip", "advanced_auto_crafter"),
+            ("auto_crafter_tooltip", "elite_auto_crafter"),
 
             //Tooltips and recipe category after highest tier machine
             ("chargers", "elite_charger"),
